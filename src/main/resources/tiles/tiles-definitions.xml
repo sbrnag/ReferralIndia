@@ -5,7 +5,7 @@
 
 	<!-- DEFAULT PAGE -->
 
-	<definition name="start" template="/WEB-INF/views/layout/front-layout.jsp">
+	<definition name="landingpage" template="/WEB-INF/views/layout/front-layout.jsp">
 		<put-attribute name="header"
 			value="/WEB-INF/views/partials/loginheader.jsp" />
 		<put-attribute name="body"

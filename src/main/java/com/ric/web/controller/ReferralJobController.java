@@ -41,6 +41,7 @@ public class ReferralJobController {
 		rj.setPosition(request.getOpen_position());
 		rj.setSkill(request.getSkill());
 		rj.setCompany(request.getCompany());
+		rj.setPostedBy(request.getPosted_by());
 
 		rj.setPostedDate(new Date());
 
@@ -73,16 +74,32 @@ public class ReferralJobController {
 
 		List<ReferralJob> rfjobs = service.findAll();
 		List<ReferralJobBO> rfjobBo = new ArrayList<ReferralJobBO>();
-		for (ReferralJob k : rfjobs) {
+		int size=rfjobs.size();
+		//to show latest 4 jobs only 
+		for(int i=1;i<5;i++)
+		{
+			ReferralJobBO bo = new ReferralJobBO();
+			bo.setCompany(rfjobs.get(size-i).getCompany());
+			bo.setSkill(rfjobs.get(size-i).getSkill());
+			bo.setOpen_position(rfjobs.get(size-i).getPosition());
+			bo.setPosted_by(rfjobs.get(size-i).getPostedBy());
+			
+			bo.setPosted_date(rfjobs.get(size-i).getPostedDate());
+			bo.setExpire_date(rfjobs.get(size-i).getExpireDate());
+			rfjobBo.add(bo);
+		}
+	
+		
+		/*for (ReferralJob k : rfjobs) {
 			ReferralJobBO bo = new ReferralJobBO();
 			bo.setCompany(k.getCompany());
 			bo.setSkill(k.getSkill());
 			bo.setOpen_position(k.getPosition());
 			rfjobBo.add(bo);
 
-		}
-
-		return rfjobBo;
+		}*/
+		
+	return rfjobBo;
 
 	}
 

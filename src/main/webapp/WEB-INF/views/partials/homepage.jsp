@@ -12,15 +12,14 @@
 <style>
 #postjob {
 	position: absolute;
-	border-style: solid;
-	border-width: 2px;
+	border-style:none;
 	top: 60px;
 }
-#jobstatus{
-position: absolute;
-top:80px;
-right:70px;
 
+#jobstatus {
+	position: absolute;
+	top: 80px;
+	right: 70px;
 }
 </style>
 
@@ -85,7 +84,7 @@ right:70px;
 			url : "postajob",
 			data : $("#rfjob").serialize(),
 			success : function(result) {
-			
+
 				$("#jobstatus").text(result.status)
 			},
 			error : function(e) {
@@ -100,32 +99,47 @@ right:70px;
 
 
 <script>
-	$(document).ready(function() {
-		
-			$.ajax({
-				type : "GET",
-				url : "displayreferraljobs",
-				success : function(data) {
+	$(document)
+			.ready(
+					function() {
 
-					var tr;
-					
-					for ( var i = 0; i < data.length; i++) {
-						tr = $('<tr/>');
-						tr.append("<input type=\"Checkbox\" name=\"select\" value=\"selected\"/>");
-						tr.append("<td>" + data[i].open_position + "</td>");
-						tr.append("<td>" + data[i].skill + "</td>");
-						tr.append("<td>" + data[i].company + "</td>");
-						
-						
-						$('#rfjobs').append(tr);
+						$
+								.ajax({
+									type : "GET",
+									url : "displayreferraljobs",
+									success : function(data) {
 
-					}
-				},
-				error : function(e) {
-				}
-			});
-		});
-	
+										var tr;
+
+										for ( var i = 0; i < data.length; i++) {
+											tr = $('<tr/>');
+											tr
+													.append("<input type=\"Checkbox\" name=\"select\" value=\"selected\"/>");
+											tr.append("<td>"
+													+ data[i].posted_date
+													+ "</td>");
+											tr.append("<td>"
+													+ data[i].expire_date
+													+ "</td>");
+											tr.append("<td>"
+													+ data[i].open_position
+													+ "</td>");
+											tr.append("<td>" + data[i].skill
+													+ "</td>");
+											tr.append("<td>" + data[i].company
+													+ "</td>");
+											tr.append("<td>"
+													+ data[i].posted_by
+													+ "</td>");
+
+											$('#rfjobs').append(tr);
+
+										}
+									},
+									error : function(e) {
+									}
+								});
+					});
 </script>
 
 
@@ -136,9 +150,8 @@ right:70px;
 <body>
 
 	<div id="postjob">
-		<b>post a job reference</b>
-		<sf:form method="POST"  commandName="rfjob"
-			id="rfjob">
+		<b>post referral job</b>
+		<sf:form method="POST" commandName="rfjob" id="rfjob">
 			<table>
 
 
@@ -215,6 +228,10 @@ right:70px;
 
 						</sf:select></td>
 					<td><sf:errors path="location" /></td>
+					<sf:hidden path="posted_by" value="${user.username}" />
+
+
+
 
 					<td><input type="Button" value="Post" onclick="postjobAjax()"></td>
 				</tr>
@@ -225,8 +242,8 @@ right:70px;
 
 		</sf:form>
 	</div>
-<div id="jobstatus"></div>
-	
+	<div id="jobstatus"></div>
+	<h3>Latest jobs posted</h3>
 	<div id="rfjobs"></div>
 
 </body>

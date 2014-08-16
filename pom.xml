@@ -12,6 +12,10 @@
 		<spring.security.version>3.2.4.RELEASE</spring.security.version>
 
 	</properties>
+	
+	
+
+
 	<dependencies>
 
 
@@ -48,7 +52,10 @@
 			<version>1.7.7</version>
 		</dependency>
 
-
+		
+		
+		
+	
 		<!-- END Logging dependencies -->
 
 

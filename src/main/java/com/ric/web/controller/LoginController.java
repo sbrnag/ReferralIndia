@@ -62,12 +62,12 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public ModelAndView getLoginPage() {
+	public String getLoginPage() {
 
-		ModelAndView mv = new ModelAndView();
+		//ModelAndView mv = new ModelAndView();
 		log.info("Login Page is going to lauch ");
-		mv.setViewName("start");
-		return mv;
+		//mv.setViewName("landingpage");
+		return "landingpage";
 
 	}
 
